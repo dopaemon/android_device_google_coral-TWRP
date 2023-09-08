@@ -295,6 +295,7 @@ PRODUCT_PACKAGES += \
     libtunnel \
     libodsp \
     adnc_strm.primary.default
+
 # Add Oslo test for debug rom
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
@@ -325,6 +326,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.defer_fps_frame_count=2 \
     vendor.display.primary_vsyncs_rate_change=2
+
+# Keystore
+PRODUCT_PACKAGES += \
+    android.system.keystore2
 
 # camera google face detection
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -1025,6 +1030,7 @@ PRODUCT_PACKAGES += \
     qseecomd.recovery \
     android.hardware.gatekeeper@1.0-service-qti.recovery \
     android.hardware.keymaster@4.1-service.citadel.recovery \
+    android.hardware.keymaster@4.0 \
     android.hardware.keymaster@4.0-service-qti.recovery \
     android.hardware.weaver@1.0-service.citadel.recovery \
     citadeld.recovery \
@@ -1047,6 +1053,6 @@ PRODUCT_PACKAGES += \
     nos_app_avb.recovery \
     pixelatoms-cpp.recovery \
     libion.recovery \
-    libkeymasterutils.recovery 
+    libkeymasterutils.recovery
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota_retrofit.mk)

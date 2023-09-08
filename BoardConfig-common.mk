@@ -20,6 +20,7 @@ include build/make/target/board/BoardConfigPixelCommon.mk
 TARGET_BOARD_PLATFORM := msmnile
 TARGET_BOARD_INFO_FILE := device/google/coral/board-info.txt
 USES_DEVICE_GOOGLE_CORAL := true
+ALLOW_MISSING_DEPENDENCIES := true
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
