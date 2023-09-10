@@ -19,6 +19,7 @@ include build/make/target/board/BoardConfigMainlineCommon.mk
 TARGET_BOARD_PLATFORM := msmnile
 TARGET_BOARD_INFO_FILE := device/google/coral/board-info.txt
 USES_DEVICE_GOOGLE_CORAL := true
+ALLOW_MISSING_DEPENDENCIES := true
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -36,6 +37,17 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a76
 
 TARGET_BOARD_COMMON_PATH := device/google/coral/sm8150
 
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+KERNEL_LD := LD=ld.lld
+TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_CONFIG := floral_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/msm-4.14
+TARGET_NEEDS_DTBOIMAGE := true
+BUILD_BROKEN_DUP_RULES := true
+
 BOARD_KERNEL_CMDLINE += console=ttyMSM0,115200n8 androidboot.console=ttyMSM0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x237
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
@@ -48,14 +60,13 @@ BOARD_KERNEL_CMDLINE += loop.max_part=7 twrpfastboot=1
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
-BOARD_KERNEL_IMAGE_NAME := Image.lz4
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_BOOT_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+TARGET_KERNEL_ADDITIONAL_FLAGS := DTC=$(shell pwd)/prebuilts/tools-lineage/$(HOST_OS)-x86/dtc/dtc
 
 # DTBO partition definitions
-BOARD_PREBUILT_DTBOIMAGE := device/google/coral-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
 TARGET_NO_KERNEL := false
